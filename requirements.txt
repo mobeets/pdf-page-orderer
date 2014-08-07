@@ -1,0 +1,4 @@
+CherryPy==3.2.4
+Mako==0.8.1
+argparse==1.1
+pyPdf==1.13

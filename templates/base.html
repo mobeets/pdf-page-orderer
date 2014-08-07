@@ -1,0 +1,38 @@
+## base.mako
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml"> 
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        
+        <link href='http://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+        <link rel=StyleSheet href="/static/styles.css" type="text/css"/>
+        
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-42857746-1', 'jehosafet.com');
+          ga('require', 'linkid', 'linkid.js');
+          ga('send', 'pageview');
+        </script>
+
+        <title>.pdf booklet helper (Jehosafet)</title>
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="content">
+                <span class="byline">&#10555; <a href="http://www.jehosafet.com" target="_blank">Jehosafet</a></span>
+                <h1><a href="/">.pdf booklet helper</a></h1>
+                <h3>What is this?</h3>
+                This page reorders the pages in your .pdf so you can print a double-sided booklet with multiple pages in each sheet.
+                <hr>
+                ${self.body()}
+            </div>
+        </div>
+    </body>
+</html>

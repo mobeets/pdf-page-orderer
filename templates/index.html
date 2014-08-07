@@ -1,0 +1,46 @@
+<%inherit file="/base.html"/>
+<hr>
+<br>
+<form action="" method="POST" enctype="multipart/form-data">
+    <div>
+        <table>
+            <tr>
+                <td>Input file (.pdf):</td><td><input type="file" name="myfile"/></td>
+            </tr>
+            <tr>
+               <td>Pages in each printed sheet:</td>
+               <td>
+                    <input type="text" name="pages_per_sheet">
+                </td>
+            </tr>
+            <tr>
+                <td></td><td><input type="submit"></td>
+            </tr>
+        </table>
+    </div>
+</form>
+<br>
+<br>
+<font color="red">
+    ${error}
+</font>
+<b>
+<font color="green">
+    ${result}
+</font>
+</b>
+<hr>
+<h3>Why is this useful?</h3>
+<i>
+Many .pdf readers, like Adobe Reader, let you print a .pdf as a booklet OR they let you print multiple pages per sheet--but not both. If the pages of your booklet are more than twice as small as an A4 sheet, you can use this page to avoid wasting paper as well as the tedium of manually redordering your .pdf's pages.
+</i>
+<br>
+<br>
+<img src="/static/booklet_layout.png" style="width:100%; position:relative;">
+<br>
+<h3>Example</h3>
+<i>
+If you want to make an A6 booklet printed on A4 paper, upload your .pdf and insert '4' in the form above. Download the resulting .pdf and print it double-sided, with 4 pages per sheet. Now just fold, cut, and staple, and your booklet is done! No wasted paper.
+</i>
+<br>
+<br>
