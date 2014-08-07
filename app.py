@@ -37,9 +37,9 @@ class Root(object):
                     error = 'Error uploading file.'
             if not error:
                 error, result = self.process(inf, pps/2, sp)
-        tmp = lookup.get_template('pdf_booklet.html')
         error = '' if error is None else error
         result = '' if result is None else result
+        tmp = lookup.get_template('index.html')
         return tmp.render(result=result, error=error)
 
     def upload(self, myfile):
@@ -86,8 +86,7 @@ def inner_main(settings):
 def main():
     cherrypy.config.update(conf.settings)
     
-    db_engine = Engine()
-    page_order_app = inner_main(db_engine)
+    page_order_app = inner_main(conf.pdf_helper_settings)
     root_app = cherrypy.tree.mount(page_order_app, '/', conf.root_settings)
     root_app.merge(conf.settings)
 
