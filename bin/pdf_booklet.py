@@ -1,7 +1,7 @@
 import sys
 import argparse
 from pyPdf import PdfFileWriter, PdfFileReader
-from page_orderer import get_page_order
+from .page_orderer import get_page_order
 
 def read(infile):
     return PdfFileReader(file(infile, "rb"))
@@ -30,13 +30,13 @@ def reorder(outfile, inp, page_order):
 
 def reorder_main(infile, outfile, pairs_per_sheet, start_page):
     inp = read(infile)
-    print 'Read {0}.'.format(infile)
+    print('Read {0}.'.format(infile))
     npages = get_npages(inp)
-    print 'Found {0} pages.'.format(npages)
+    print('Found {0} pages.'.format(npages))
     page_order = get_page_order(npages, pairs_per_sheet, start_page, None)
-    print 'Reordering pages (None is BLANK): {0}'.format(', '.join([str(x) for x in page_order]))
+    print('Reordering pages (None is BLANK): {0}'.format(', '.join([str(x) for x in page_order])))
     reorder(outfile, inp, page_order)
-    print 'Wrote to {0}.'.format(outfile)
+    print('Wrote to {0}.'.format(outfile))
 
 def main():
     desc_msg = "Outputs the proper page ordering for printing a double-sided booklet"
@@ -58,8 +58,8 @@ def main():
     args = parser.parse_args(sys.argv[1:])
     def print_illegal(msg):
         parser.print_help()
-        print
-        print msg
+        print()
+        print(msg)
         exit(-1)
     if args.start_page <= 0 or args.pairs_per_sheet <= 0:
         print_illegal('--pages and --pairs_per_sheet must be positive')

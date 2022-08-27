@@ -1,7 +1,9 @@
 import sys
 import argparse
 
-def get_front(npages, blank_page_name, (outside_left,inside_left),(inside_right,outside_right)):
+def get_front(npages, blank_page_name, xxx_todo_changeme, xxx_todo_changeme1):
+    (outside_left,inside_left) = xxx_todo_changeme
+    (inside_right,outside_right) = xxx_todo_changeme1
     left = inside_left
     right = inside_right
     if left > npages:
@@ -10,7 +12,9 @@ def get_front(npages, blank_page_name, (outside_left,inside_left),(inside_right,
         right = blank_page_name
     return (left, right)
 
-def get_back(npages, blank_page_name, (outside_left,inside_left),(inside_right,outside_right)):
+def get_back(npages, blank_page_name, xxx_todo_changeme2, xxx_todo_changeme3):
+    (outside_left,inside_left) = xxx_todo_changeme2
+    (inside_right,outside_right) = xxx_todo_changeme3
     left = outside_left
     right = outside_right
     if left > npages:
@@ -33,7 +37,7 @@ def get_page_order(npages, segments_per_sheet, offset, blank_page_name):
     assert npages_with_blanks % 4 == 0
     n_segments = npages_with_blanks/4
 
-    front_and_back_page_pairs = [(i, i+1) for i in xrange(offset+1, offset+npages_with_blanks+1, 2)]
+    front_and_back_page_pairs = [(i, i+1) for i in range(offset+1, offset+npages_with_blanks+1, 2)]
     page_pairs_left_of_staple, page_pairs_right_of_staple = front_and_back_page_pairs[:n_segments], front_and_back_page_pairs[n_segments:]
     page_pairs_left_of_staple.reverse()
 
@@ -78,15 +82,15 @@ def main():
     args = parser.parse_args(sys.argv[1:])
     def print_illegal(msg):
         parser.print_help()
-        print
-        print msg
+        print()
+        print(msg)
         exit(-1)
     if args.start_page <= 0 or args.pages <= 0 or args.pairs_per_sheet <= 0:
         print_illegal('--pages and --pairs_per_sheet must be positive')
     res = get_page_order(args.pages, args.pairs_per_sheet, args.start_page-1, args.blank_page)
-    print
-    print ','.join([str(x) for x in res])
-    print
+    print()
+    print(','.join([str(x) for x in res]))
+    print()
 
 if __name__ == '__main__':
     main()

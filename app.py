@@ -1,6 +1,6 @@
 import os
 import cgi
-import urllib
+import urllib.request, urllib.parse, urllib.error
 from subprocess import Popen
 from tempfile import NamedTemporaryFile
 
@@ -51,7 +51,7 @@ class Root(object):
     def test_pdf(self, infile):
         try:
             bin.pdf_booklet.read(infile)
-        except Exception, e:
+        except Exception as e:
             return "ERROR reading pdf: " + str(e)
 
     def process(self, inf, pps, sp):
@@ -60,15 +60,15 @@ class Root(object):
         if err:
             return err, None
         args = ['python', self.exe_path, '--infile', inf, '--outfile', outf, '--pairs_per_sheet', str(pps), '--start_page', str(sp)]
-        print '========================='
-        print ' '.join(args)
-        print '========================='
+        print('=========================')
+        print(' '.join(args))
+        print('=========================')
         Popen(args)
         outf_name = os.path.split(outf)[1]
         return None, 'Your new .pdf is <a href="/{0}/{1}">here</a> (temporarily).'.format(self.media_dir, outf_name)
 
     def download_file(self, url, outfile):
-        urllib.urlretrieve(url, outfile)
+        urllib.request.urlretrieve(url, outfile)
 
     def destfile(self):
         f = NamedTemporaryFile(suffix='.pdf', dir=self.media_path, delete=False)
