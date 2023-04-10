@@ -1,6 +1,6 @@
 import sys
 import argparse
-from pyPdf import PdfFileWriter, PdfFileReader
+from PyPDF2 import PdfFileWriter, PdfFileReader
 from .page_orderer import get_page_order
 
 def read(infile):
