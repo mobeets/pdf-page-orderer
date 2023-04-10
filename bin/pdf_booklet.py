@@ -1,10 +1,10 @@
 import sys
 import argparse
-from PyPDF2 import PdfFileWriter, PdfFileReader
-from .page_orderer import get_page_order
+from pypdf import PdfWriter, PdfReader
+from bin.page_orderer import get_page_order
 
 def read(infile):
-    return PdfFileReader(open(infile, "rb"))
+    return PdfReader(open(infile, "rb"))
 
 def write(outfile, output):
     outputStream = open(outfile, "wb")
@@ -15,16 +15,16 @@ def title(inp):
     return inp.getDocumentInfo().title
 
 def get_npages(inp):
-    return inp.getNumPages()
+    return len(inp.pages)
 
 def reorder(outfile, inp, page_order):
-    dims = lambda: (inp.getPage(0).mediaBox.getWidth(), inp.getPage(0).mediaBox.getHeight())
-    output = PdfFileWriter()
+    dims = lambda: (inp.pages[0].mediabox.width, inp.pages[0].mediabox.height)
+    output = PdfWriter()
     for page_index in page_order:
         if page_index:
-            output.addPage(inp.getPage(page_index-1))
+            output.add_page(inp.pages[page_index-1])
         else:
-            output.addBlankPage(*dims())
+            output.add_blank_page(*dims())
             # output.addPage(blank_page())
     write(outfile, output)
 
@@ -33,7 +33,7 @@ def reorder_main(infile, outfile, pairs_per_sheet, start_page):
     print('Read {0}.'.format(infile))
     npages = get_npages(inp)
     print('Found {0} pages.'.format(npages))
-    page_order = get_page_order(npages, pairs_per_sheet, start_page, None)
+    page_order = get_page_order(npages, int(pairs_per_sheet), start_page, None)
     print('Reordering pages (None is BLANK): {0}'.format(', '.join([str(x) for x in page_order])))
     reorder(outfile, inp, page_order)
     print('Wrote to {0}.'.format(outfile))

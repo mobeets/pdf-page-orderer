@@ -1,5 +1,4 @@
 import os
-import cgi
 import urllib.request, urllib.parse, urllib.error
 from subprocess import Popen
 from tempfile import NamedTemporaryFile
@@ -36,7 +35,7 @@ class Root(object):
                 except:
                     error = 'Error uploading file.'
             if not error:
-                error, result = self.process(inf, pps/2, sp)
+                error, result = self.process(inf, int(pps/2), sp)
         error = '' if error is None else error
         result = '' if result is None else result
         tmp = lookup.get_template('index.html')

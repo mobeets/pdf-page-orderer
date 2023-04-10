@@ -33,9 +33,9 @@ def get_page_order(npages, segments_per_sheet, offset, blank_page_name):
     assert type(npages) is int
     assert type(segments_per_sheet) is int
 
-    npages_with_blanks = 4*((npages / 4) + (npages % 4 > 0)) # round npages up to a multiple of 4
+    npages_with_blanks = 4*(int(npages / 4) + (npages % 4 > 0)) # round npages up to a multiple of 4
     assert npages_with_blanks % 4 == 0
-    n_segments = npages_with_blanks/4
+    n_segments = int(npages_with_blanks/4)
 
     front_and_back_page_pairs = [(i, i+1) for i in range(offset+1, offset+npages_with_blanks+1, 2)]
     page_pairs_left_of_staple, page_pairs_right_of_staple = front_and_back_page_pairs[:n_segments], front_and_back_page_pairs[n_segments:]
@@ -48,7 +48,7 @@ def get_page_order(npages, segments_per_sheet, offset, blank_page_name):
 
     page_order = []
     get_segment = lambda ind, key: segments[ind][key] if ind in segments else (blank_page_name, blank_page_name)
-    segments_per_group = n_segments/segments_per_sheet + (n_segments % segments_per_sheet > 0)
+    segments_per_group = int(n_segments/segments_per_sheet + (n_segments % segments_per_sheet > 0))
     for sheet_no in range(segments_per_group):
         # front page
         for j in range(segments_per_sheet):
