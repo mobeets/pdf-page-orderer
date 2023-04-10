@@ -4,10 +4,10 @@ from PyPDF2 import PdfFileWriter, PdfFileReader
 from .page_orderer import get_page_order
 
 def read(infile):
-    return PdfFileReader(file(infile, "rb"))
+    return PdfFileReader(open(infile, "rb"))
 
 def write(outfile, output):
-    outputStream = file(outfile, "wb")
+    outputStream = open(outfile, "wb")
     output.write(outputStream)
     outputStream.close()
 
